@@ -69,6 +69,13 @@ const nextConfig: NextConfig = {
   // Harmless outside Docker: `next start` keeps working as before.
   output: "standalone",
 
+  // This repo lives under a parent directory that also has a lockfile.
+  // Pin Turbopack to the app root so dev mode does not infer the parent
+  // workspace and watch/cache more of the filesystem than necessary.
+  turbopack: {
+    root: process.cwd(),
+  },
+
   /**
    * Cross-origin dev access (Next.js 16).
    *
